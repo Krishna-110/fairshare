@@ -29,9 +29,10 @@ public class SecurityConfig {
 
                 // 2. Configure Endpoint Rules
                 .authorizeHttpRequests(auth -> auth
-                        // Allow our public testing endpoint, error pages, and login routes
-                        .requestMatchers("/api/test/seed", "/error", "/", "/login**", "/oauth2/**", "/favicon.ico").permitAll()
-                        // Lock down everything else
+                        // Allow login routes, error pages, and static assets
+                        .requestMatchers("/error", "/", "/login**", "/oauth2/**", "/favicon.ico").permitAll()
+                        // Lock down all actual data APIs
+                        .requestMatchers("/api/**").authenticated()
                         .anyRequest().authenticated()
                 )
 

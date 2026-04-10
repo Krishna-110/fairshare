@@ -32,3 +32,10 @@ build/
 ### VS Code ###
 .vscode/
 .env
+
+### Frontend ###
+App-frontend/node_modules/
+App-frontend/.expo/
+
+### Temp/Diagnostic ###
+ip_raw.txt

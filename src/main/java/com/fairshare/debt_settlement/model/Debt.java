@@ -1,6 +1,6 @@
 package com.fairshare.debt_settlement.model;
 
-import java.math.BigDecimal;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,20 +9,16 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Table(name =  "debts", indexes = {
-        @Index(name = "idx_group_id", columnList = "groupId")
-})
+@Table(name = "debts")
 @Data
 @NoArgsConstructor
-@Check(constraints = "amount > 0 AND debtor_id != creditor_id")
 public class Debt {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String groupId;
+
 
     @ManyToOne
     @JoinColumn(name = "debtor_id", nullable = false)
@@ -35,8 +31,8 @@ public class Debt {
     @OnDelete(action = OnDeleteAction.CASCADE) // Same here, cascade the delete
     private Person creditor;
 
-    @Column(nullable = false, precision = 19, scale = 2)
-    private BigDecimal amount;
+    @Column(nullable = false)
+    private Double amount;
 
 
 
